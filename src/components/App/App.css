@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+}
+
+.App__dark {
+    background-color: #282c34;
+}
+
+
+.App__dark .App-header {
+    border-bottom: 1px solid #09d3ac;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.list {
+  padding: 20px;
+}
+
+.list-item {
+  margin: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ececec;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+.list-item > div {
+  flex: 1;
+  text-align: left;
+}
+
+.avatar {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+}
+
+.btn-element {
+    margin: 0 10px;
+    color: aqua;
+}
+
+.divider {
+    width: 100px;
+    height: 2px;
+    background-color: lightseagreen;
+}
+
+.actions-block {
+
+  border: 1px solid #ececec;;
+  padding: 10px 20px;
+}
+
+.App-footer{
+    align-items: center;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    height: 150px;
+    margin-top: 180px;
+}
+
+.footer-btn{
+    margin: 5px;
+    color: white;
+}
+
+.App__green{
+    background-color: green;
+}
+.App__red{
+    background: red;
+}
