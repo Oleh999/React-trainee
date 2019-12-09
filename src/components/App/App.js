@@ -1,94 +1,52 @@
-import React, { Component } from 'react';
-import { people } from '../../constants/people';
-import { ButtonAsClass as Button } from '../Button/Button';
-import { Header } from '../Header/Header';
-import { Footer } from "../Footer/Footer";
-import Checkbox from '../Checkbox/Checkbox';
-import { Input } from '../Input/Input';
+import React, {Component} from 'react';
+import {ButtonAsClass as Button} from '../Button/Button';
+import {Header} from '../Header/Header';
+import {Footer} from "../Footer/Footer";
 import {Form} from "../Form/Form";
-import {Switch} from "../Switch/Switch";
 import './App.css';
 
 const CN = 'App';
 
-function renderPeopleList() {
-  return people.map(person => {
-    const { firstName, lastName, avatar, address = 'New York' } = person;
-
-    return (
-      <li className="list-item" key={`${firstName} ${lastName}`}>
-        <div>{firstName}</div>
-        <div>{lastName}</div>
-        <img
-          src={avatar}
-          className="avatar"
-          alt={`avatar for ${firstName} ${lastName}`}
-        />
-        <div>{address}</div>
-      </li>
-    );
-  });
-}
-
 class AppTheReal extends Component {
-  constructor() {
-    super();
+    constructor() {
+        super();
 
-    this.greeting = 'Hello, world!';
+        this.state = {
+            display: false,
+            isDarkTheme: false,
+            showSuccess: false
+        };
+    }
 
-    this.state = {
-      // isChecked: false,
-      // inputValue: '',
-        display:false,
-        isDarkTheme: false,
-        showSuccess:false
+    onApplyBtnClick = () => {
+        const {isDarkTheme, currentStatus, display} = this.state;
+        this.setState({
+
+            display: true,
+            currentStatus: !currentStatus,
+            isDarkTheme: true
+
+        });
+    };
+    onApplyBtn2Click = () => {
+        const {isDarkTheme, currentStatus, display} = this.state;
+        this.setState({
+
+            display: false,
+            currentStatus: !currentStatus,
+            isDarkTheme: false
+
+        });
     };
 
-    // this.onApplyBtnClick = this.onApplyBtnClick.bind(this);
-    // this.onCheck = this.onCheck.bind(this);
-  }
-  //
+    onFormSubmit = () => {
+        const {showSuccess} = this.setState;
 
-
-
-  // renderActionsBlock() {
-  //   return (
-  //     <div className="actions-block">
-  //       <Button
-  //         label="Cancel"
-  //         className={`${CN}__cancel ${CN}__btn--error`}
-  //         onClick={this.onApplyBtnClick}
-  //       />
-  //
-  //       {/*<Button*/}
-  //       {/*  label="Apply"*/}
-  //       {/*  className={`${CN}__apply`}*/}
-  //       {/*  onClick={this.onApplyBtnClick}*/}
-  //       {/*/>*/}
-  //     </div>
-  //   );
-  // }
-    toggleHandler=()=>{
-        const currentStatus=this.state.display;
+        this.setState({
+            showSuccess: true
+        })
     };
-  onApplyBtnClick=()=> {
-    const {isDarkTheme,currentStatus,display} = this.state;
-    this.setState({
 
-        display:!display,
-        currentStatus:!currentStatus,
-        isDarkTheme: !isDarkTheme
-
-    });
-  };
-
-  onFormSubmit= () =>{
-      const {showSuccess}=this.setState;
-
-      this.setState({
-          showSuccess: true
-      })
-  };
     renderActionsBlock() {
         return (
             <div className="actions-block">
@@ -106,49 +64,50 @@ class AppTheReal extends Component {
             </div>
         );
     }
-  render() {
-    const { isChecked, inputValue, isDarkTheme,showSuccess,display} = this.state;
-    const { onSubmit} = this.state;
-    const greetingElement = (<div className="class-12">{this.greeting}</div>);
-    const darkThemeClass = isDarkTheme ? `${CN}__dark` : '';
-    console.log('App render');
 
-    const isDisplay1 = display ? `${CN}__green` : `${CN}__red`;
-    const isDisplay2 = display ? `${CN}__red` : `${CN}__green`;
-    return (
+    render() {
+        const {isDarkTheme, showSuccess, display} = this.state;
+        const darkThemeClass = isDarkTheme ? `${CN}__dark` : '';
+        const isDisplay1 = display ? `${CN}__green` : `${CN}__red`;
+        const isDisplay2 = display ? `${CN}__red` : `${CN}__green`;
+        const data=isDarkTheme ?  'Dark':'Light';
+        const color=isDarkTheme ?  `${CN}__changeColor`:'';
+        return (
 
-      <div className={`${CN} ${darkThemeClass} `}>
-          <Header
-          className="App-header"
-          showLogo={true}
-          >
-          <div>this is children of header</div>
-          </Header>
+            <div className={`${CN} ${darkThemeClass} `}>
+                <Header
+                    className="App-header"
+                    showLogo={true}
+                >
+                    <div>this is children of header</div>
+                </Header>
 
-          <Form onFormSubmit={this.onFormSubmit}/>
+                <Form onFormSubmit={this.onFormSubmit}/>
 
-          {showSuccess && <div>All good!</div>}
-
-        {/*  <Footer className="App-footer">*/}
-        {/*  </Footer>*/}
+                {showSuccess && <div>All good!</div>}
 
 
-          {this.renderActionsBlock()}
-          <Button
-              label="ON/OFF"
-              className={`${CN} ${isDisplay1}`}
-              onClick={this.onApplyBtnClick}
-          />
+                <Button
+                    label="ON"
+                    className={`${CN} ${isDisplay1}`}
+                    onClick={this.onApplyBtnClick}
+                />
 
-          {/*<Button*/}
-          {/*    label="OFF"*/}
-          {/*    className={`${CN} ${isDisplay2}`}*/}
-          {/*    onClick={this.onApplyBtnClick}*/}
-          {/*/>*/}
-      </div>
+                <Button
+                    label="OFF"
+                    className={`${CN} ${isDisplay2}`}
+                    onClick={this.onApplyBtn2Click}
+                />
+                <div className={`${CN} ${color}`}>
+                     {data}
+                </div>
 
-    );
-  }
+                <Footer className="App-footer">
+                </Footer>
+            </div>
+
+        );
+    }
 }
 
 export default AppTheReal;
